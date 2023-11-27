@@ -1,12 +1,12 @@
 <template>
   <div>
-    MyOrder
+    我是Cart
   </div>
 </template>
 
 <script>
 export default {
-  name: 'MyOrderIndex'
+    name: "CartIndex"
 }
 </script>
 

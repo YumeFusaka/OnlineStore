@@ -1,15 +1,15 @@
 <template>
   <div>
-    Search
+    我是Home
   </div>
 </template>
   
 <script>
-export default {
-  name: 'SearchIndex'
+  export default {
+    name: "HomeIndex"
 }
 </script>
-
+  
 <style>
-
+  
 </style>

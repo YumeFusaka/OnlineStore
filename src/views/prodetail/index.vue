@@ -1,12 +1,12 @@
 <template>
   <div>
-    我是ProDetail
+    ProDetail
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ProDetail'
+  name: 'ProDetailIndex'
 }
 </script>
 

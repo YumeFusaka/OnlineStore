@@ -1,12 +1,12 @@
 <template>
   <div>
-    我是Pay
+    Pay
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Pay'
+  name: 'PayIndex'
 }
 </script>
 
