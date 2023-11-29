@@ -1,15 +1,15 @@
 <template>
-    <div>
-      我是User
-    </div>
-  </template>
-  
-  <script>
-  export default {
-      name: "UserIndex"
-  }
-  </script>
-  
-  <style>
-  
-  </style>
+  <div>
+    User
+  </div>
+</template>
+
+<script>
+export default {
+    name: "UserIndex"
+}
+</script>
+
+<style>
+
+</style>

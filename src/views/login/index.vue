@@ -98,11 +98,15 @@ export default {
         this.$toast('请输入正确的手机验证码')
         return
       }
+      console.log('发送')
       const res = await codeLogin(this.mobile,this.msgCode)
       this.$store.commit('user/setUserInfo',res.data)
       console.log(res)
       this.$toast('登录成功')
-      this.$router.push('/')
+
+      //检查是否有回跳
+      const Url = this.$route.query.backUrl || '/'
+      this.$router.replace(Url)
     }
 
   },

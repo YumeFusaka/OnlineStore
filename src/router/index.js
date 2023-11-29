@@ -11,6 +11,7 @@ import Home from '@/views/layout/home.vue'
 import Category from '@/views/layout/category.vue'
 import Cart from '@/views/layout/cart.vue'
 import User from '@/views/layout/user.vue'
+import store from '@/store'
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,26 @@ const router = new VueRouter({
     { path: '/pay', component: Pay },
     { path: '/myorder', component: MyOrder }
   ]
+})
+
+// 全局前置导航守卫
+
+//定义一个数组，专门用户存放所有需要权限访问的页面
+const authUrls = ['/pay','/myorder']
+
+// 路由守卫
+router.beforeEach((to,from,next)=>{
+  if(!authUrls.includes(to.path)){
+    next()
+    return 
+  }
+  //是权限页面
+  const token = store.getters.token
+  if(token){
+    next()
+  }else{
+    next('/login')
+  }
 })
 
 export default router

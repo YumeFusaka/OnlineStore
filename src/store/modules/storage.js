@@ -1,7 +1,8 @@
-const Info_Key = 'info'
+const INFO_KEY = 'infoKey'
+const HISTORY_LIST = 'historyList'
 
 export const getInfo = ()=>{
-    const result = localStorage.getItem(Info_Key)
+    const result = localStorage.getItem(INFO_KEY)
     return result ? JSON.parse(result) : {
         token: '',
         userId: ''
@@ -9,9 +10,18 @@ export const getInfo = ()=>{
 }
 
 export const setInfo = (info)=>{
-    localStorage.setItem(Info_Key,json.stringify(info))
+    localStorage.setItem(INFO_KEY,JSON.stringify(info))
 }
 
 export const removeInfo = ()=>{
-    localStorage.removeItem(Info_Key)
+    localStorage.removeItem(INFO_KEY)
+}
+
+export const getHistoryList = ()=>{
+    const result = localStorage.getItem(HISTORY_LIST)
+    return result ? JSON.parse(result) : []
+}
+
+export const setHistoryList = (arr)=>{
+    localStorage.setItem(HISTORY_LIST,JSON.stringify(arr))
 }
