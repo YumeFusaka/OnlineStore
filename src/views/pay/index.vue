@@ -68,7 +68,6 @@
         <span v-else class="red">+￥0.00</span>
       </div>
     </div>
-
     <!-- 支付方式 -->
     <div class="pay-way">
       <span class="tit">支付方式</span>
@@ -81,28 +80,29 @@
 
     <!-- 买家留言 -->
     <div class="buytips">
-      <textarea placeholder="选填：买家留言（50字内）" name="" id="" cols="30" rows="10"></textarea>
+      <textarea v-model="remark" placeholder="选填：买家留言（50字内）" name="" id="" cols="30" rows="10"></textarea>
     </div>
   </div>
 
   <!-- 底部提交 -->
   <div class="footer-fixed">
     <div class="left">实付款：<span>￥{{ order.orderTotalPrice }}</span></div>
-    <div class="tipsbtn">提交订单</div>
+    <div @click="submitOrder" class="tipsbtn">提交订单</div>
   </div>
 </div>
 </template>
 
 <script>
 import { getAddressList } from '@/api/address'
-import { checkOrder } from '@/api/order'
+import { checkOrder,submitOrder } from '@/api/order'
 export default {
   name: 'PayIndex',
   data () {
     return {
       addressList: [],
       order: {},
-      personal: {}
+      personal: {},
+      remark: ''
     }
   },
   computed:{
@@ -118,6 +118,15 @@ export default {
     },
     cartIds(){
       return this.$route.query.cartIds
+    },
+    goodsId(){
+      return this.$route.query.goodsId
+    },
+    goodsNum(){
+      return this.$route.query.goodsNum
+    },
+    goodsSkuId(){
+      return this.$route.query.goodsSkuId
     }
   },
   created(){
@@ -130,11 +139,40 @@ export default {
       this.addressList = list
     },
     async getOrderList(){
-      const {data:{order,personal}} = await checkOrder(this.mode,{
-        cartIds: this.cartIds
-      })
-      this.order = order
-      this.personal = personal
+      if(this.mode === 'cart'){
+        const {data:{order,personal}} = await checkOrder(this.mode,{
+          cartIds: this.cartIds
+        })
+        this.order = order
+        this.personal = personal
+      }
+      if(this.mode == 'buyNow'){
+        const {data:{order,personal}} = await checkOrder(this.mode,{
+          goodsId: this.goodsId,
+          goodsNum: this.goodsNum,
+          goodsSkuId: this.goodsSkuId
+        })
+        this.order = order
+        this.personal = personal
+      }
+    },
+    async submitOrder(){
+      if(this.mode === 'cart'){
+        await submitOrder(this.mode,{
+          cartIds: this.cartIds,
+          remark: this.remark
+        })
+      }
+      if(this.mode === 'buyNow'){
+        await submitOrder(this.mode,{
+          goodsId: this.goodsId,
+          goodsNum: this.goodsNum,
+          goodsSkuId: this.goodsSkuId,
+          remark: this.remark
+        })
+      }
+      this.$toast.success('支付成功')
+      this.$router.replace('/myorder')
     }
   }
 }

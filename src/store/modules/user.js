@@ -1,4 +1,4 @@
-import { getInfo,setInfo } from "./storage"
+import { getInfo,setInfo } from "../../utils/storage"
 
 export default {
     namespaced: true,
@@ -13,6 +13,12 @@ export default {
             setInfo(obj)
         }
     },
-    actions:{},
+    actions:{
+        logout(context){
+            // 清除本地存储
+            context.commit('setUserInfo',{})
+            context.commit('cart/setCartList',[],{root:true})
+        }
+    },
     getters:{}
 }

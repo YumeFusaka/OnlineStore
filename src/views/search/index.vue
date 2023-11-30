@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import {getHistoryList,setHistoryList} from '@/store/modules/storage'
+import {getHistoryList,setHistoryList} from '@/utils/storage'
 export default {
   name: 'SearchIndex',
   data(){
