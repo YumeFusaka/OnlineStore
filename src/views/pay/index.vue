@@ -80,7 +80,7 @@
 
     <!-- 买家留言 -->
     <div class="buytips">
-      <textarea v-model="remark" placeholder="选填：买家留言（50字内）" name="" id="" cols="30" rows="10"></textarea>
+      <textarea v-model="remark" placeholder="选填:买家留言（50字内）" name="" id="" cols="30" rows="10"></textarea>
     </div>
   </div>
 
